@@ -13,33 +13,33 @@
 
 // const myTabsParent = document.querySelector(div.tab);
 
-let topics = [];
+// let topics = [];
 
-axios.get('https://lambda-times-backend.herokuapp.com/topics')
-    .then(res => {
-        console.log('data from tabs:', res);
-        // myTabsParent.append(tabsComp(response.data))
-        topics = res.data.topics;
-        console.log('data set to topics:', topics);
-    })
-    .catch(error =>{
-        console.log('The data was not returned', error);
-    })    
+// axios.get('https://lambda-times-backend.herokuapp.com/topics')
+//     .then(res => {
+//         console.log('data from tabs:', res);
+//         // myTabsParent.append(tabsComp(response.data))
+//         topics = res.data.topics;
+//         console.log('data set to topics:', topics);
+//     })
+//     .catch(error =>{
+//         console.log('The data was not returned', error);
+//     })    
 
 
-// MY FUNCTION:
+// // MY FUNCTION:
 
-function tabsComp (object){
-    const tab = document.createElement('div');
-    tab.classList.add('tab');
-    tab.textContent = 'Topic Here';
+// function tabsComp (object){
+//     const tab = document.createElement('div');
+//     tab.classList.add('tab');
+//     tab.textContent = 'Topic Here';
 
-    return tab;
-}
+//     return tab;
+// }
 
-// MAP OVER THE DATA:
+// // MAP OVER THE DATA:
 
-const holder = topics.map(tab => createComponent(tab));
-const newTab = document.querySelector('div.tab');
-holder.forEach(tab => newTab.append(tab));
+// const holder = topics.map(tab => createComponent(tab));
+// const newTab = document.querySelector('div.tab');
+// holder.forEach(tab => newTab.append(tab));
 

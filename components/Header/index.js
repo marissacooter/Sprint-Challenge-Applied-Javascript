@@ -30,3 +30,6 @@ function Header(object) {
 
     return hdr;
 }
+
+let header = document.querySelector('.header-container');
+header.append(Header()); 
