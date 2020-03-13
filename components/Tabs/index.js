@@ -13,10 +13,14 @@
 
 // const myTabsParent = document.querySelector(div.tab);
 
+let topics = [];
+
 axios.get('https://lambda-times-backend.herokuapp.com/topics')
-    .then(response => {
-        console.log(response);
+    .then(res => {
+        console.log('data from tabs:', res);
         // myTabsParent.append(tabsComp(response.data))
+        topics = res.data.topics;
+        console.log('data set to topics:', topics);
     })
     .catch(error =>{
         console.log('The data was not returned', error);
@@ -32,3 +36,10 @@ function tabsComp (object){
 
     return tab;
 }
+
+// MAP OVER THE DATA:
+
+const holder = topics.map(tab => createComponent(tab));
+const newTab = document.querySelector('div.tab');
+holder.forEach(tab => newTab.append(tab));
+
