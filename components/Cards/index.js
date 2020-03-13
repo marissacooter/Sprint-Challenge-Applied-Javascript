@@ -17,3 +17,48 @@
 // </div>
 //
 // Create a card for each of the articles and add the card to the DOM.
+
+// AXIOS REQUEST:
+
+const myArticleParent = document.querySelector(div.cards);
+
+axios.get('https://lambda-times-backend.herokuapp.com/articles')
+  .then(response => {
+    console.log(response);
+    myArticleParent.append(articleCard(response.data))
+    }) 
+    .catch(error => {
+    console.log("the data was not returned", error)
+  })
+
+
+// MY FUNCTION:
+
+function articleCard (object){
+    const crd = document.createElement('div');
+    crd.classList.add('card');
+
+    const hdLine = document.createElement('div');
+    hdLine.classList.add('headline');
+    hdLine.textContent = `${object.headline}`;
+    crd.append(hdline);
+
+    const author = document.createElement('div');
+    author.classList.add('author');
+    crd.append(author);
+
+    const imgContain = document.createElement('div');
+    imgContain.classList.add('img-container');
+    author.append('imgContain');
+
+    const crdImg = document.createElement('img');
+    // img_url? having trouble finding it in the object
+    crdImg.setAttribute('src',object.img_url);
+    imgContain.append(crdImg);
+
+    const byAuthor = document.createElement('span');
+    byAuthor.textContent = `By ${object.author}`;
+    author.append(byAuthor);
+
+    return crd;
+}
