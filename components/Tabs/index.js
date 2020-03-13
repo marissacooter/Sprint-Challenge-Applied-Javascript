@@ -11,12 +11,12 @@
 
 // AXIOS REQUEST:
 
-const myTabsParent = document.querySelector(div.cards);
+// const myTabsParent = document.querySelector(div.tab);
 
 axios.get('https://lambda-times-backend.herokuapp.com/topics')
-    .then(repsonse => {
+    .then(response => {
         console.log(response);
-        myTabsParent.append(tabsComp(response.data))
+        // myTabsParent.append(tabsComp(response.data))
     })
     .catch(error =>{
         console.log('The data was not returned', error);
@@ -29,4 +29,6 @@ function tabsComp (object){
     const tab = document.createElement('div');
     tab.classList.add('tab');
     tab.textContent = 'Topic Here';
+
+    return tab;
 }

@@ -20,12 +20,12 @@
 
 // AXIOS REQUEST:
 
-const myArticleParent = document.querySelector(div.cards);
+// const myArticleParent = document.querySelector(div.cards);
 
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
   .then(response => {
     console.log(response);
-    myArticleParent.append(articleCard(response.data))
+    // myArticleParent.append(articleCard(response.data))
     }) 
     .catch(error => {
     console.log("the data was not returned", error)
@@ -53,7 +53,7 @@ function articleCard (object){
 
     const crdImg = document.createElement('img');
     // img_url? having trouble finding it in the object
-    crdImg.setAttribute('src',object.img_url);
+    crdImg.setAttribute('src',object.favicon.ico);
     imgContain.append(crdImg);
 
     const byAuthor = document.createElement('span');
