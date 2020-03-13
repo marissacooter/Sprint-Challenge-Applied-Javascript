@@ -18,47 +18,61 @@
 //
 // Create a card for each of the articles and add the card to the DOM.
 
-// AXIOS REQUEST:
+axios.get('https://lambda-times-backend.herokuapp.com/articles')
+.then( res => {
+    console.log('[cards server respsonse]', res);
+    let articles = res.data.articles;
+    // console.log('[checking new articles]', articles);
+    let articlesContainer = document.querySelector('.cards-container');
+    articles.javascript.map(article => {
+        articlesContainer.append(articleGenerator(article));
+    });
 
-// const myArticleParent = document.querySelector(div.cards);
+    articles.bootstrap.map(article => {
+        articlesContainer.append(articleGenerator(article));
+    });
 
-// axios.get('https://lambda-times-backend.herokuapp.com/articles')
-//   .then(response => {
-//     console.log(response);
-//     // myArticleParent.append(articleCard(response.data))
-//     }) 
-//     .catch(error => {
-//     console.log("the data was not returned", error)
-//   })
+    articles.technology.map(article => {
+        articlesContainer.append(articleGenerator(article));
+    });
 
+    articles.jquery.map(article => {
+        articlesContainer.append(articleGenerator(article));
+    });
 
-// MY FUNCTION:
+    articles.node.map(article => {
+        articlesContainer.append(articleGenerator(article));
+    });
 
-// function articleCard (object){
-//     const crd = document.createElement('div');
-//     crd.classList.add('card');
+})
+.catch( err => {
+    console.log(err);
+});
 
-//     const hdLine = document.createElement('div');
-//     hdLine.classList.add('headline');
-//     hdLine.textContent = `${object.headline}`;
-//     crd.append(hdline);
+const articleGenerator = article => {
+    const newCard = document.createElement('div');
+    newCard.classList.add('card');
 
-//     const author = document.createElement('div');
-//     author.classList.add('author');
-//     crd.append(author);
+    const headline = document.createElement('div');
+    headline.classList.add('headline');
+    headline.textContent = article.headline;
+    newCard.append(headline);
 
-//     const imgContain = document.createElement('div');
-//     imgContain.classList.add('img-container');
-//     author.append('imgContain');
+    const author = document.createElement('div');
+    author.classList.add('author');
+    newCard.append(author);
 
-//     const crdImg = document.createElement('img');
-//     // img_url? having trouble finding it in the object
-//     crdImg.setAttribute('src',object.favicon.ico);
-//     imgContain.append(crdImg);
+    const imgContainer = document.createElement('div');
+    imgContainer.classList.add('img-container');
+    author.append(imgContainer);
 
-//     const byAuthor = document.createElement('span');
-//     byAuthor.textContent = `By ${object.author}`;
-//     author.append(byAuthor);
+    const img = document.createElement('img');
+    img.setAttribute('src', article.authorPhoto);
+    imgContainer.append(img);
 
-//     return crd;
-// }
+    const span = document.createElement('span');
+    span.textContent = `By ${article.authorName}`;
+    author.append(span);
+
+    return newCard;
+}

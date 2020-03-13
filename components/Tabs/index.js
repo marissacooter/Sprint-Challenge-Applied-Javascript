@@ -8,38 +8,25 @@
 //  The tab component should look like this:
 //    <div class="tab">topic here</div>
 
+axios.get('https://lambda-times-backend.herokuapp.com/topics')
+.then(res => {
+    // console.log('[tab server response]', res);
+    let topics = res.data.topics;
+    // console.log('checking new topics', topics);
+    let topicsContainer = document.querySelector('.topics');
+    topics.map(topic => {
+        topicsContainer.append(tabGenerator(topic))
+    })
+})
+.catch(err => {
+    console.log(err);
+});
 
-// AXIOS REQUEST:
+const tabGenerator = topic => {
+    const newTab = document.createElement('div');
+    newTab.classList.add('tab');
+    newTab.textContent = topic;
+    // console.log('checking topic in func', topic);
 
-// const myTabsParent = document.querySelector(div.tab);
-
-// let topics = [];
-
-// axios.get('https://lambda-times-backend.herokuapp.com/topics')
-//     .then(res => {
-//         console.log('data from tabs:', res);
-//         // myTabsParent.append(tabsComp(response.data))
-//         topics = res.data.topics;
-//         console.log('data set to topics:', topics);
-//     })
-//     .catch(error =>{
-//         console.log('The data was not returned', error);
-//     })    
-
-
-// // MY FUNCTION:
-
-// function tabsComp (object){
-//     const tab = document.createElement('div');
-//     tab.classList.add('tab');
-//     tab.textContent = 'Topic Here';
-
-//     return tab;
-// }
-
-// // MAP OVER THE DATA:
-
-// const holder = topics.map(tab => createComponent(tab));
-// const newTab = document.querySelector('div.tab');
-// holder.forEach(tab => newTab.append(tab));
-
+    return newTab;
+};
